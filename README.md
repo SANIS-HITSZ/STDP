@@ -18,11 +18,9 @@
 
 We introduce the Signal Temporal Logic-Guided Diffusion Policy (STDP), which
 generates receding-horizon three-dimensional (3-D) waypoints from STL
-specifications, local multi-view RGB observations, and motion history. A
-relation-aware graph Transformer preserves operator semantics, temporal
-intervals, predicate attributes, and directed operand relations, while
-cross-attention-based conditional diffusion grounds these structured tokens in
-visual and motion cues.
+specifications, local multi-view RGB observations, and motion history. It
+combines a relation-aware graph Transformer with cross-attention-based
+conditional diffusion.
 
 <p align="center">
   <img src="assets/model_overview.png" width="95%" alt="Overview of the STDP framework" />
@@ -30,42 +28,31 @@ visual and motion cues.
 
 ### Closed-Loop Planning Algorithm
 
-```mermaid
-flowchart TD
-    A[STL specification, trained policy, horizon H, diffusion steps Td, and rollout length Kphi] --> B[Parse the STL specification once into a typed graph]
-    B --> C[Initialize waypoint history from the episode origin]
-    C --> D[Acquire front, down, left, and right RGB views]
-    D --> E[Encode the typed graph, RGB views, and waypoint history as memory]
-    E --> F[Sample Gaussian noise]
-    F --> G[Predict noise and update the sample at each selected reverse diffusion time]
-    G --> H[De-standardize and reshape the sample into H waypoints]
-    H --> I[Execute the first waypoint and append the reached pose to the history]
-    I --> J{Rollout complete?}
-    J -- No --> D
-    J -- Yes --> K[Return the complete executed trajectory]
+**Algorithm 1: UAV Visual Navigation without a Global Semantic Map**
+
+```text
+Require: STL specification phi, trained policy pi_theta, horizon H,
+         diffusion steps T_d, and rollout length K_phi
+1:  Parse phi once into typed graph G_phi
+2:  Initialize waypoint history h_0 from the episode origin
+3:  for k = 0, 1, ..., K_phi - 1 do
+4:      Acquire front, down, left, and right RGB views o_k
+5:      Encode G_phi, o_k, and h_k as memory M_k
+6:      Sample x_Td ~ N(0, I)
+7:      for each selected reverse diffusion time t do
+8:          epsilon_hat <- Dec_theta(x_t, t, M_k)
+9:          Update x_t-1 with the diffusion scheduler
+10:     end for
+11:     De-standardize and reshape x_0 into H waypoints
+12:     Execute the first waypoint; append the reached pose to form h_k+1
+13: end for
 ```
 
 ## Experimental Results
 
-Table II reports task-wise results in the ID scene and three OOD scenes, in
-which values are episode-level micro-averages within each scene. In Scene-1,
-STDP reached an overall SR<sub>STL</sub> of 63.6% with a CR of 2.7%; Reach-Avoid
-was strongest (81.8%), whereas Either-Or, Multi-Target, and Door Puzzle achieved
-63.8%, 63.0%, and 41.5%. The decrease with task composition indicates that
-multiple events, alternatives, and longer sequences remain more demanding than
-bounded reach-and-avoid behavior.
-
-Across OOD scenes, pooled SR<sub>STL</sub> was 41.7% (CR, 4.1%), with
-scene-level SR between 33.2% and 47.7%. Reach-Avoid remained highest (60.5%),
-while the other tasks reached 32.6–34.9%. The drop under changed geometry and
-furniture placement was largest for multi-event and branching specifications,
-yet satisfaction remained substantial without access to a global semantic map
-or OOD adaptation.
-
-Figure 3 illustrates a successful planning example for each representative STL
-task. Solid blue and dashed gray curves denote executed and reference
-trajectories, respectively; green and orange overlays denote target and
-avoidance regions.
+STDP achieves 63.6% ID STL success with a 2.7% collision rate and 41.7% OOD
+success with a 4.1% collision rate under changed layouts and furniture
+placement. Figure 3 shows successful plans for all four STL task families.
 
 <p align="center">
   <img src="assets/main_results.png" width="78%" alt="Closed-loop navigation results" />
@@ -79,11 +66,9 @@ avoidance regions.
 
 #### 1. STL Encoder
 
-With the planner fixed, the graph Transformer increased overall
-SR<sub>STL</sub> from 38.2% to 63.6% in ID and from 30.8% to 41.7% in OOD,
-improving every task family while keeping overall CR at or below 4.1% (Table
-III). The gain supports more effective encoding of nested operators, temporal
-intervals, and predicate dependencies than CLIP-Text.
+The graph Transformer increases overall SR<sub>STL</sub> from 38.2% to 63.6% in
+ID and from 30.8% to 41.7% in OOD, supporting more effective STL encoding than
+CLIP-Text.
 
 <p align="center">
   <img src="assets/ablation_stl_encoder.png" width="76%" alt="STL encoder ablation results" />
@@ -91,20 +76,9 @@ intervals, and predicate dependencies than CLIP-Text.
 
 #### 2. Trajectory Model
 
-Diffusion was most useful for compositional specifications: cross-attention-
-based conditional diffusion remained close to the Transformer baseline on
-Reach-Avoid (81.8% versus 72.7% in ID; 60.5% versus 65.6% in OOD), but improved
-the other tasks by 18.9–55.3 points in ID and 9.5–25.9 points in OOD (Table IV).
-CR changed by -0.9 and 1.8 points, supporting stronger complex-task planning
-and cross-scene transfer without a commensurate collision increase.
-
 Cross-attention-based conditional diffusion outperformed FiLM-based
 conditional diffusion across scenes and task families, with overall gains of
-25.9 points in ID and 10.0 points in OOD; gains were largest on complex tasks
-(24.5–40.4 points in ID and 7.5–15.5 points in OOD), while CR stayed at or
-below 4.1%. Token-level cross-attention therefore extracts and aligns STL,
-multi-view, and motion-history conditions more effectively than global
-FiLM-based conditional modulation.
+25.9 points in ID and 10.0 points in OOD.
 
 <p align="center">
   <img src="assets/ablation_trajectory_model.png" width="86%" alt="Trajectory model ablation results" />
@@ -113,9 +87,7 @@ FiLM-based conditional modulation.
 #### 3. DDIM Denoising Steps
 
 Table V shows the performance of different DDIM denoising steps, where 20 steps
-outperformed both 10 and 50 steps. Too few steps provided insufficient
-refinement for reliable planning, whereas an excessively long reverse process
-may accumulate approximation errors; we therefore used 20 steps throughout.
+outperformed both 10 and 50 steps; we therefore used 20 steps throughout.
 
 <p align="center">
   <img src="assets/ablation_ddim_steps.png" width="86%" alt="DDIM denoising-step ablation results" />
