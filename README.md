@@ -4,13 +4,13 @@
 
 ## Open-Source Progress
 
-![Dataset](https://img.shields.io/badge/dataset-released-brightgreen)
+[![Dataset](https://img.shields.io/badge/dataset-released-brightgreen)](https://huggingface.co/datasets/bfz111/STDP-Dataset)
 ![Model Weights](https://img.shields.io/badge/model_weights-released-blue)
 ![Code](https://img.shields.io/badge/code-coming_soon-lightgrey)
 
 | Component | Status |
 |---|---|
-| Dataset | Released |
+| Dataset | [Released on Hugging Face](https://huggingface.co/datasets/bfz111/STDP-Dataset) |
 | Model weights | Released |
 | Source code | Coming soon |
 
@@ -43,6 +43,29 @@ the in-distribution scene and three out-of-distribution scenes.
   <img src="assets/main_results.png" width="78%" alt="Closed-loop navigation results" />
 </p>
 
+### Ablation Studies
+
+Higher SR<sub>STL</sub> and lower CR are better. The structured graph encoder
+substantially improves STL satisfaction over CLIP-Text in both ID and OOD
+settings while retaining a low collision rate.
+
+<p align="center">
+  <img src="assets/ablation_stl_encoder.png" width="76%" alt="STL encoder ablation results" />
+</p>
+
+Cross-attention diffusion achieves the strongest overall STL success among the
+trajectory-model variants, with the largest gains appearing on compositional
+tasks. The DDIM study uses 20 denoising steps because it provides the best
+overall STL success in both ID and OOD evaluation.
+
+<p align="center">
+  <img src="assets/ablation_trajectory_model.png" width="86%" alt="Trajectory model ablation results" />
+</p>
+
+<p align="center">
+  <img src="assets/ablation_ddim_steps.png" width="86%" alt="DDIM denoising-step ablation results" />
+</p>
+
 The examples below show successful closed-loop plans for Reach-Avoid,
 Multi-Target, Either-Or, and Door Puzzle tasks. Solid blue and dashed gray
 curves denote executed and reference trajectories; green and orange overlays
@@ -56,8 +79,10 @@ denote target and avoidance regions.
 
 ### Dataset
 
-The `data/` directory contains synchronized Gazebo observations and reference
-trajectories from four furnished indoor scenes. Each trajectory includes:
+The complete dataset is hosted on
+[Hugging Face](https://huggingface.co/datasets/bfz111/STDP-Dataset). It contains
+synchronized Gazebo observations and reference trajectories from four
+furnished indoor scenes. Each trajectory includes:
 
 - a semantic STL specification and its coordinate-grounded form;
 - synchronized `front`, `down`, `left`, and `right` RGB observations; and
@@ -72,9 +97,11 @@ The `splits/` directory provides the following manifests:
 - `test_cross.jsonl`: cross-layout evaluation data from the remaining scenes.
 
 Each JSONL record contains the STL formula, task type, scene identifier,
-trajectory path, and four image-directory paths. All paths are relative to the
-repository root. To use the dataset, select a split, read its JSONL records,
-then load the referenced trajectory CSV and synchronized image files.
+trajectory path, and four image-directory paths. The dataset is distributed as
+one archive per trajectory. Extracting an archive restores its `data/` paths
+relative to the dataset root. To use the dataset, select a split, read its
+JSONL records, download and extract the corresponding trajectory archives,
+then load the referenced CSV and synchronized image files.
 
 ### Model Weights
 
