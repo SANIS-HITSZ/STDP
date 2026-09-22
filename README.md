@@ -7,9 +7,9 @@
 
 | Component | Status |
 |---|---|
-| Dataset | Coming soon |
+| Dataset | To be released upon paper acceptance |
 | Model weights | Released |
-| Source code | Coming soon |
+| Source code | To be released upon paper acceptance |
 
 ## Method
 
@@ -94,8 +94,8 @@ outperformed both 10 and 50 steps; we therefore used 20 steps throughout.
 
 ### Dataset
 
-**Coming soon.** The dataset split manifests are included in this repository.
-The complete dataset will be released later. It contains
+**To be released upon paper acceptance.** The dataset split manifests are included in this repository.
+The complete dataset will be released upon paper acceptance. It contains
 synchronized Gazebo observations and reference trajectories from four
 furnished indoor scenes. Each trajectory includes:
 
@@ -133,7 +133,8 @@ required `openai/clip-vit-base-patch32` model must be downloaded separately or
 provided through a local `transformers` cache. The checkpoint also excludes
 optimizer state and local filesystem paths.
 
-Loading the weights requires the forthcoming source code. The expected loading
+The source code will be released upon paper acceptance. Loading the weights
+requires the source code. The expected loading
 sequence is:
 
 1. Instantiate the STDP architecture from the stored configuration.
