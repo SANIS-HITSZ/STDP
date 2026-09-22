@@ -16,7 +16,7 @@
 
 ## Video
 
-[Watch or download the demonstration video](assets/STDP_demo.mp4) (MP4, 2 min 58 s, 1080p).
+[Download the demonstration video](https://github.com/SANIS-HITSZ/STDP/raw/refs/heads/main/assets/STDP_demo.mp4) (MP4, 2 min 58 s, 1080p).
 
 The video introduces STDP and includes complete real-world demonstrations of the Reach-Avoid, Multi-Target, Either-Or, and Door-Puzzle tasks.
 
