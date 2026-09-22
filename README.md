@@ -19,9 +19,7 @@ specifications, local multi-view RGB observations, and motion history. It
 combines a relation-aware graph Transformer with cross-attention-based
 conditional diffusion.
 
-<p align="center">
-  <img src="../../api/repo/STDP/file/assets/model_overview.png" width="95%" alt="Overview of the STDP framework" />
-</p>
+![Overview of the STDP framework](/api/repo/STDP/file/assets/model_overview.png)
 
 ### Closed-Loop Planning Algorithm
 
@@ -51,13 +49,9 @@ STDP achieves 63.6% ID STL success with a 2.7% collision rate and 41.7% OOD
 success with a 4.1% collision rate under changed layouts and furniture
 placement. Figure 3 shows successful plans for all four STL task families.
 
-<p align="center">
-  <img src="../../api/repo/STDP/file/assets/main_results.png" width="78%" alt="Closed-loop navigation results" />
-</p>
+![Closed-loop navigation results](/api/repo/STDP/file/assets/main_results.png)
 
-<p align="center">
-  <img src="../../api/repo/STDP/file/assets/qualitative_results.png" width="95%" alt="Qualitative trajectory-planning results" />
-</p>
+![Qualitative trajectory-planning results](/api/repo/STDP/file/assets/qualitative_results.png)
 
 ### Ablation Studies
 
@@ -67,9 +61,7 @@ The graph Transformer increases overall SR<sub>STL</sub> from 38.2% to 63.6% in
 ID and from 30.8% to 41.7% in OOD, supporting more effective STL encoding than
 CLIP-Text.
 
-<p align="center">
-  <img src="../../api/repo/STDP/file/assets/ablation_stl_encoder.png" width="76%" alt="STL encoder ablation results" />
-</p>
+![STL encoder ablation results](/api/repo/STDP/file/assets/ablation_stl_encoder.png)
 
 #### 2. Trajectory Model
 
@@ -77,18 +69,14 @@ Cross-attention-based conditional diffusion outperformed FiLM-based
 conditional diffusion across scenes and task families, with overall gains of
 25.9 points in ID and 10.0 points in OOD.
 
-<p align="center">
-  <img src="../../api/repo/STDP/file/assets/ablation_trajectory_model.png" width="86%" alt="Trajectory model ablation results" />
-</p>
+![Trajectory model ablation results](/api/repo/STDP/file/assets/ablation_trajectory_model.png)
 
 #### 3. DDIM Denoising Steps
 
 Table V shows the performance of different DDIM denoising steps, where 20 steps
 outperformed both 10 and 50 steps; we therefore used 20 steps throughout.
 
-<p align="center">
-  <img src="../../api/repo/STDP/file/assets/ablation_ddim_steps.png" width="86%" alt="DDIM denoising-step ablation results" />
-</p>
+![DDIM denoising-step ablation results](/api/repo/STDP/file/assets/ablation_ddim_steps.png)
 
 ## Dataset and Model Weights
 
