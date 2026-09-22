@@ -4,13 +4,10 @@
 
 ## Open-Source Progress
 
-[![Dataset](https://img.shields.io/badge/dataset-released-brightgreen)](https://huggingface.co/datasets/bfz111/STDP-Dataset)
-![Model Weights](https://img.shields.io/badge/model_weights-released-blue)
-![Code](https://img.shields.io/badge/code-coming_soon-lightgrey)
 
 | Component | Status |
 |---|---|
-| Dataset | [Released on Hugging Face](https://huggingface.co/datasets/bfz111/STDP-Dataset) |
+| Dataset | Split manifests included |
 | Model weights | Released |
 | Source code | Coming soon |
 
@@ -18,7 +15,7 @@
 
 Play the full demonstration below (2 min 58 s).
 
-https://github.com/user-attachments/assets/8cec6e1c-95dc-44a7-9a59-a87199d8e1e4
+<video src="assets/STDP_review.mp4" controls preload="metadata" width="100%" title="STDP demonstration"></video>
 
 The video introduces STDP and includes complete real-world demonstrations of the Reach-Avoid, Multi-Target, Either-Or, and Door-Puzzle tasks.
 
@@ -105,8 +102,9 @@ outperformed both 10 and 50 steps; we therefore used 20 steps throughout.
 
 ### Dataset
 
-The complete dataset is hosted on
-[Hugging Face](https://huggingface.co/datasets/bfz111/STDP-Dataset). It contains
+This anonymous snapshot includes the dataset split manifests. The full dataset
+archives are not linked during review to avoid revealing the hosting account.
+The dataset contains
 synchronized Gazebo observations and reference trajectories from four
 furnished indoor scenes. Each trajectory includes:
 
