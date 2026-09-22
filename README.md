@@ -7,17 +7,9 @@
 
 | Component | Status |
 |---|---|
-| Dataset | Split manifests included |
+| Dataset | Coming soon |
 | Model weights | Released |
 | Source code | Coming soon |
-
-## Video
-
-Play the full demonstration below (2 min 58 s).
-
-<video src="assets/STDP_review.mp4" controls preload="metadata" width="100%" title="STDP demonstration"></video>
-
-The video introduces STDP and includes complete real-world demonstrations of the Reach-Avoid, Multi-Target, Either-Or, and Door-Puzzle tasks.
 
 ## Method
 
@@ -98,13 +90,12 @@ outperformed both 10 and 50 steps; we therefore used 20 steps throughout.
   <img src="assets/ablation_ddim_steps.png" width="86%" alt="DDIM denoising-step ablation results" />
 </p>
 
-## Released Dataset and Model Weights
+## Dataset and Model Weights
 
 ### Dataset
 
-This anonymous snapshot includes the dataset split manifests. The full dataset
-archives are not linked during review to avoid revealing the hosting account.
-The dataset contains
+**Coming soon.** The dataset split manifests are included in this repository.
+The complete dataset will be released later. It contains
 synchronized Gazebo observations and reference trajectories from four
 furnished indoor scenes. Each trajectory includes:
 
