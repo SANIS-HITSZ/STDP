@@ -4,13 +4,13 @@
 
 ## Open-Source Progress
 
-![Dataset](https://img.shields.io/badge/dataset-upon_paper_acceptance-lightgrey)
+[![Dataset](https://img.shields.io/badge/dataset-released-blue)](https://anonymous-hf.com/a/h8or94tutz4u/)
 ![Model Weights](https://img.shields.io/badge/model_weights-released-blue)
 ![Code](https://img.shields.io/badge/code-upon_paper_acceptance-lightgrey)
 
 | Component | Status |
 |---|---|
-| Dataset | To be released upon paper acceptance |
+| Dataset | [Released](https://anonymous-hf.com/a/h8or94tutz4u/) |
 | Model weights | Released |
 | Source code | To be released upon paper acceptance |
 
@@ -97,8 +97,8 @@ outperformed both 10 and 50 steps; we therefore used 20 steps throughout.
 
 ### Dataset
 
-**To be released upon paper acceptance.** The dataset split manifests are included in this repository.
-The complete dataset will be released upon paper acceptance. It contains
+**Released.** The complete dataset is available on [Anonymous Hugging Face](https://anonymous-hf.com/a/h8or94tutz4u/).
+The dataset split manifests are included in this repository. The dataset contains
 synchronized Gazebo observations and reference trajectories from four
 furnished indoor scenes. Each trajectory includes:
 
