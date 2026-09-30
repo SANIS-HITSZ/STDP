@@ -136,23 +136,22 @@ optimizer state and local filesystem paths.
 
 ## Trajectory Inference
 
-[inference/infer_trajectory.py](inference/infer_trajectory.py) predicts five XYZ
-waypoints from an STL specification, four RGB views and observed position history.
-**The runner is released; model implementation and training code will be released
-upon paper acceptance.** Full inference requires a local implementation exposing
-`src.models.build_model(config)`; the public checkout supports input checking only.
+[infer_trajectory.py](inference/infer_trajectory.py) predicts five XYZ waypoints
+from STL, four RGB views and position history. **Model implementation and training
+code will be released upon paper acceptance.** Until then, this repository
+supports input checking; full inference requires a separately supplied
+`src.models.build_model(config)` implementation.
 
-Use Python 3.11 and run from the repository root:
+With Python 3.11, run from the repository root:
 
 ```bash
 python -m pip install torch==2.9.1 torchvision==0.24.1 transformers==4.57.3 \
   numpy==2.4.0 Pillow==12.1.0
 ```
 
-Choose a PyTorch build compatible with your CPU or CUDA installation. Extract
-`archives/world_v1/trajectory_0587_05.tar` from the
-[dataset](https://anonymous-hf.com/a/h8or94tutz4u/) into `./STDP-Dataset/`,
-preserving its `data/` directory. Check inputs without model code:
+Extract the [dataset](https://anonymous-hf.com/a/h8or94tutz4u/) archive
+`archives/world_v1/trajectory_0587_05.tar` into `./STDP-Dataset/`, preserving
+`data/`. Check inputs:
 
 ```bash
 python inference/infer_trajectory.py \
@@ -160,8 +159,8 @@ python inference/infer_trajectory.py \
   --sample-index 0 --step-index 2 --check-inputs
 ```
 
-For full inference, place the model implementation in `./model-source/` and the
-separate `openai/clip-vit-base-patch32` weights in `./clip-vit-base-patch32/`:
+For full inference, supply model code in `./model-source/` and
+`openai/clip-vit-base-patch32` weights in `./clip-vit-base-patch32/`:
 
 ```bash
 python inference/infer_trajectory.py \
@@ -172,9 +171,7 @@ python inference/infer_trajectory.py \
   --output outputs/prediction.json
 ```
 
-Indices start at zero; only history through the selected step is used. Manifest
-paths are relative to the dataset root. Use `--device cpu` for CPU inference and
-`--help` for all options. The runner outputs waypoints without controlling a vehicle.
+Use `--device cpu` for CPU inference or `--help` for options.
 
 ## Citation
 
