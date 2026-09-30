@@ -93,9 +93,7 @@ outperformed both 10 and 50 steps; we therefore used 20 steps throughout.
   <img src="assets/ablation_ddim_steps.png" width="86%" alt="DDIM denoising-step ablation results" />
 </p>
 
-## Dataset and Model Weights
-
-### Dataset
+## Dataset
 
 **Released.** The complete dataset is available on [Anonymous Hugging Face](https://anonymous-hf.com/a/h8or94tutz4u/).
 The dataset split manifests are included in this repository. The dataset contains
@@ -121,7 +119,7 @@ relative to the dataset root. To use the dataset, select a split, read its
 JSONL records, download and extract the corresponding trajectory archives,
 then load the referenced CSV and synchronized image files.
 
-### Model Weights
+## Model Weights
 
 `model/STDP.pt` contains the Stage 1 weights used for evaluation. The checkpoint
 includes:
@@ -214,60 +212,6 @@ Image and trajectory references inside a manifest must be relative to
 `--dataset-root`. References outside that directory are rejected. Command-line
 file arguments are resolved from the current working directory; examples use
 relative paths.
-
-### Use a custom observation
-
-Alternatively, use `--input observation.json`. Its schema is:
-
-```json
-{
-  "stl": "F[0:20](chair)",
-  "images": {
-    "front": "observations/front.png",
-    "down": "observations/down.png",
-    "left": "observations/left.png",
-    "right": "observations/right.png"
-  },
-  "history": [[-7.0, 0.6, 1.8], [-6.8, 0.6, 1.8]]
-}
-```
-
-The image paths are relative to the JSON file's directory. The four RGB views
-must correspond to the last observed history position. History contains observed
-XYZ positions in meters, in the same coordinate convention as the released
-trajectory CSVs. This checkpoint was trained on those CSV coordinates: do not
-substitute body-frame displacements or independently subtract an episode origin.
-The runner applies the checkpoint mean and standard deviation, then reverses
-that normalization for the prediction.
-
-```bash
-python inference/infer_trajectory.py \
-  --input observation.json \
-  --model-source ./model-source \
-  --clip-model ./clip-vit-base-patch32 \
-  --device cpu --output outputs/prediction.json
-```
-
-History must contain at least one finite XYZ position and cannot exceed the
-checkpoint limit (256 positions). It is not silently truncated. Images are
-ordered `front`, `down`, `left`, `right`, resized to 224 by 224, and normalized
-with the same CLIP statistics used during training.
-
-### Output and interpretation
-
-The output JSON contains `waypoints` (five XYZ positions), `next_waypoint`
-(the first position), the observed history length, sampling steps, seed and
-checkpoint SHA256. It contains no input paths, usernames or hostnames.
-The default is the checkpoint's 20 sampling steps; `--steps` may override it
-within the trained diffusion schedule. Results may differ across hardware or
-software versions even with the same seed.
-
-This is one prediction conditioned on recorded observations. Repeated predictions
-against a recorded dataset are not a closed-loop rollout. In a closed-loop system,
-execute only the first waypoint, obtain new synchronized observations and actual
-executed history, then replan. The runner neither executes waypoints nor performs
-collision checking or STL-success evaluation; its output alone is not evidence
-of safe flight or reproduction of the paper's benchmark results.
 
 ## Citation
 
