@@ -6,15 +6,13 @@
 
 [![Dataset](https://img.shields.io/badge/dataset-released-blue)](https://anonymous-hf.com/a/h8or94tutz4u/)
 ![Model Weights](https://img.shields.io/badge/model_weights-released-blue)
-![Inference Runner](https://img.shields.io/badge/inference_runner-released-blue)
-![Model Implementation](https://img.shields.io/badge/model_implementation-upon_paper_acceptance-lightgrey)
+![Code](https://img.shields.io/badge/code-partially_released-yellow)
 
 | Component | Status |
 |---|---|
 | Dataset | [Released](https://anonymous-hf.com/a/h8or94tutz4u/) |
 | Model weights | Released |
-| Trajectory inference runner | [Released; requires a local model implementation](#trajectory-inference) |
-| Model implementation and training code | To be released upon paper acceptance |
+| Code | [Inference runner released](#trajectory-inference); model implementation and training code upon paper acceptance |
 
 ## Method
 
