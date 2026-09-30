@@ -6,13 +6,15 @@
 
 [![Dataset](https://img.shields.io/badge/dataset-released-blue)](https://anonymous-hf.com/a/h8or94tutz4u/)
 ![Model Weights](https://img.shields.io/badge/model_weights-released-blue)
-![Code](https://img.shields.io/badge/code-upon_paper_acceptance-lightgrey)
+![Inference Runner](https://img.shields.io/badge/inference_runner-released-blue)
+![Model Implementation](https://img.shields.io/badge/model_implementation-upon_paper_acceptance-lightgrey)
 
 | Component | Status |
 |---|---|
 | Dataset | [Released](https://anonymous-hf.com/a/h8or94tutz4u/) |
 | Model weights | Released |
-| Source code | To be released upon paper acceptance |
+| Trajectory inference runner | [Released; requires a local model implementation](inference/README.md) |
+| Model implementation and training code | To be released upon paper acceptance |
 
 ## Method
 
@@ -136,9 +138,18 @@ required `openai/clip-vit-base-patch32` model must be downloaded separately or
 provided through a local `transformers` cache. The checkpoint also excludes
 optimizer state and local filesystem paths.
 
-The source code will be released upon paper acceptance. Loading the weights
-requires the source code. The expected loading
-sequence is:
+The [trajectory inference runner](inference/README.md) is available now. It
+handles observation loading, preprocessing, checkpoint loading and waypoint
+output. The model implementation and training code will be released upon paper
+acceptance. **Full inference currently requires a separately provided local
+model implementation; the public checkout alone cannot run the model.**
+Input validation is available without the model implementation.
+
+The runner was validated with the released checkpoint and real dataset samples
+on a local validation host; see [validation scope](inference/VALIDATION.md).
+It was organized separately, and the existing research scripts were not modified.
+
+The expected loading sequence is:
 
 1. Instantiate the STDP architecture from the stored configuration.
 2. Initialize the frozen CLIP vision and text encoders from

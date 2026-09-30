@@ -1,0 +1,6 @@
+# Validated with Python 3.11; install a PyTorch build compatible with your device.
+torch==2.9.1
+torchvision==0.24.1
+transformers==4.57.3
+numpy==2.4.0
+Pillow==12.1.0
