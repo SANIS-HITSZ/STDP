@@ -23,7 +23,7 @@ combines a relation-aware graph Transformer with cross-attention-based
 conditional diffusion.
 
 <p align="center">
-  <img src="assets/model_overview.png" width="95%" alt="Overview of the STDP framework" />
+  <img src="assets/model_overview.png" width="75%" alt="Overview of the STDP framework" />
 </p>
 
 ### Closed-Loop Planning Algorithm
