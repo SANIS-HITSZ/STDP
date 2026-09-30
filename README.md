@@ -55,7 +55,7 @@ success with a 4.1% collision rate under changed layouts and furniture
 placement. Figure 3 shows successful plans for all four STL task families.
 
 <p align="center">
-  <img src="assets/main_results.png" width="78%" alt="Closed-loop navigation results" />
+  <img src="assets/main_results.png" width="65%" alt="Closed-loop navigation results" />
 </p>
 
 <p align="center">
@@ -71,7 +71,7 @@ ID and from 30.8% to 41.7% in OOD, supporting more effective STL encoding than
 CLIP-Text.
 
 <p align="center">
-  <img src="assets/ablation_stl_encoder.png" width="76%" alt="STL encoder ablation results" />
+  <img src="assets/ablation_stl_encoder.png" width="63%" alt="STL encoder ablation results" />
 </p>
 
 #### 2. Trajectory Model
@@ -81,7 +81,7 @@ conditional diffusion across scenes and task families, with overall gains of
 25.9 points in ID and 10.0 points in OOD.
 
 <p align="center">
-  <img src="assets/ablation_trajectory_model.png" width="86%" alt="Trajectory model ablation results" />
+  <img src="assets/ablation_trajectory_model.png" width="72%" alt="Trajectory model ablation results" />
 </p>
 
 #### 3. DDIM Denoising Steps
@@ -90,7 +90,7 @@ Table V shows the performance of different DDIM denoising steps, where 20 steps
 outperformed both 10 and 50 steps; we therefore used 20 steps throughout.
 
 <p align="center">
-  <img src="assets/ablation_ddim_steps.png" width="86%" alt="DDIM denoising-step ablation results" />
+  <img src="assets/ablation_ddim_steps.png" width="72%" alt="DDIM denoising-step ablation results" />
 </p>
 
 ## Dataset
