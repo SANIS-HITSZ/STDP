@@ -142,12 +142,8 @@ code will be released upon paper acceptance.** Until then, this repository
 supports input checking; full inference requires a separately supplied
 `src.models.build_model(config)` implementation.
 
-With Python 3.11, run from the repository root:
-
-```bash
-python -m pip install torch==2.9.1 torchvision==0.24.1 transformers==4.57.3 \
-  numpy==2.4.0 Pillow==12.1.0
-```
+Python 3.11: `pip install torch==2.9.1 torchvision==0.24.1 transformers==4.57.3 numpy==2.4.0 Pillow==12.1.0`.
+Run the commands below from the repository root.
 
 Extract the [dataset](https://anonymous-hf.com/a/h8or94tutz4u/) archive
 `archives/world_v1/trajectory_0587_05.tar` into `./STDP-Dataset/`, preserving
